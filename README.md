@@ -1,2 +1,2 @@
-# bme590hrm
-Heart rate monitor project for BME590
+# Heart rate project
+Heart rate monitor project for BME590 - Medical Software Design
