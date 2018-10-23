@@ -1,6 +1,6 @@
 import numpy as np
 
-def filter_voltage(df):
+def filter_ecg(df):
 
     volt_filt = np.zeros()
     df['voltage'] = volt_filt
@@ -15,7 +15,7 @@ def r_peak_detection(df):
     return df
 
 
-def calcuate_metrics(df):
+def calculate_metrics(df):
 
     metrics = {}
 
@@ -35,6 +35,7 @@ def calcuate_metrics(df):
     metrics = calc_beats(df, metrics)
 
     return metrics
+
 
 def calc_mean_hr_bpm(df, metrics):
 
