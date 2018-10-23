@@ -4,7 +4,7 @@ from numpy import genfromtxt
 
 def read_csv(file):
 
-    df = genfromtxt(file, dtype='float', delimiter=',')
+    df = genfromtxt(file, dtype=None, delimiter=',')
 
     return df
 
