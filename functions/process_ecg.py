@@ -1,15 +1,16 @@
 import numpy as np
 
+
 def filter_ecg(df):
 
-    volt_filt = np.zeros()
+    volt_filt = np.zeros(1)
     df['voltage'] = volt_filt
     return df
 
 
 def r_peak_detection(df):
 
-    inds = np.zeros()
+    inds = np.zeros(1)
     df['r_peak_inds'] = inds
 
     return df
@@ -22,7 +23,7 @@ def calculate_metrics(df):
     # Calculate mean heart rate
     metrics = calc_mean_hr_bpm(df, metrics)
 
-    # Calculate voltage extremems
+    # Calculate voltage extremes
     metrics = calc_voltage_extremes(df, metrics)
 
     # Calculate duration
@@ -31,7 +32,7 @@ def calculate_metrics(df):
     # Calculate number of beads in a strip
     metrics = calc_num_beats(df, metrics)
 
-    # Calculate time when beats occured
+    # Calculate time when beats occur
     metrics = calc_beats(df, metrics)
 
     return metrics
@@ -70,5 +71,3 @@ def calc_beats(df, metrics):
     metrics['beats'] = np.zeros(1)
 
     return metrics
-
-

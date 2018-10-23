@@ -1,5 +1,6 @@
 from functions.load_data import read_csv, clean_data
-from functions.process_ecg import filter_ecg, r_peak_detection, calculate_metrics
+from functions.process_ecg import filter_ecg, r_peak_detection, \
+    calculate_metrics
 from functions.write_results import write_json
 
 
