@@ -5,11 +5,12 @@ from functions.load_data import read_csv, clean_data
 
 def test_read_csv():
     # Set up correct array
-    correct_array = np.array([[0, 2.1], [0.1, 0.1], [0.2,-0.9], [0.3, 0]])
+    correct_array = np.array([[0, 2.1], [0.1, 0.1], [0.2, -0.9], [0.3, 0]])
 
     # Run read_csv function
-    data = read_csv('data/read_test.csv')
+    data = read_csv('data/csv_test.csv')
     print(data)
+
     assert (data == correct_array).all()
 
 
