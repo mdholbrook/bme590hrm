@@ -13,16 +13,16 @@ def main(file):
     df = clean_data(df)
 
     # Filter ECG signal
-    df = filter_ecg(df)
+    # df = filter_ecg(df)
 
     # R-peak detection
-    df = r_peak_detection(df)
+    # df = r_peak_detection(df)
 
     # Calculate metrics
-    metrics = calculate_metrics(df)
+    # metrics = calculate_metrics(df)
 
     # Write results
-    write_json(metrics)
+    # write_json(metrics)
 
 
 if __name__ == "__main__":

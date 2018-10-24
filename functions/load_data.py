@@ -46,7 +46,6 @@ def verify_csv_extension(file):
     return True
 
 
-
 def clean_data(df):
 
     cleaned_df = np.zeros(1)
