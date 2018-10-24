@@ -11,10 +11,11 @@ def read_csv(file):
     time and voltage measurements.
 
     Args:
-        file: path to a csv file containing ECG data
+        file (str): path to a csv file containing ECG data
 
     Returns:
-        data: numpy array containing two columns, time and ECG voltage
+        data (np array): numpy array containing two columns, time and ECG
+        voltage
     """
 
     # Verify that the input file is a csv
@@ -33,7 +34,7 @@ def verify_csv_extension(file):
     csv file
 
     Args:
-        file: path to input file
+        file (str): path to input file
 
     Returns:
 
@@ -48,8 +49,63 @@ def verify_csv_extension(file):
     return True
 
 
-def interpolate_nan(df):
+def interpolate_nan(data):
+    """Interpolates NaN values in the the ECG
 
-    cleaned_df = np.zeros(1)
+    Data passed in may contain NaN values where there were strings or blank
+    spaces in the data, causing gaps in the data. This script interpolates
+    over those gaps.
 
-    return cleaned_df
+    Args:
+        data (np array): a numpy array containing time (first col) and ECG
+        (second col) signals
+
+    Returns:
+        data (np array): numpy array with interpolated NaN values
+    """
+
+    # Find and interpolate over NaN values, time then ECG
+    for i in range(2):
+        if np.isnan(data[:, i]).any():
+
+            # Find NaN values
+            nans = nan_inds(data[:, i])
+            func = non_zero_func
+
+            # Interpolate over NaN values
+            data[nans, i] = np.interp(func(nans), func(~nans), data[~nans, i])
+
+    return data
+
+
+def nan_inds(x):
+    """Function to handle indices and logical indices of NaNs.
+
+    Args
+        x (1D numpy array): a vector (time or ECG) containing NaN values
+
+    Returns:
+        nans (1D numpy array, bool): array where True denotes a NaN value
+        func (function): a function which return on all non-zero values, used
+        to index the interpolation
+
+    """
+
+    nans = np.isnan(x)
+
+    return nans
+
+
+def non_zero_func(x):
+    """Function which returns non-zero indices of an array
+
+    Args:
+        x (1d numpy array): input array
+
+    Returns:
+        inds (1d numpy array): output non-zero indicies
+    """
+
+    inds = x.nonzero()[0]
+
+    return inds
