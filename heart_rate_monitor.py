@@ -7,10 +7,10 @@ from functions.write_results import write_json
 def main(file):
 
     # Read in data
-    df = read_csv(file)
+    data = read_csv(file)
 
     # Clean input data
-    df = interpolate_nan(df)
+    data = interpolate_nan(data)
 
     # Filter ECG signal
     # df = filter_ecg(df)
