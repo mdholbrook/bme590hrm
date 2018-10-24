@@ -1,11 +1,12 @@
 import numpy as np
 import pytest
-from functions.load_data import read_csv, verify_csv_extension, clean_data
+from functions.load_data import read_csv, verify_csv_extension, interpolate_nan
 
 
 @pytest.mark.parametrize("candidate, expected", [
-    ("data/csv_test.csv", np.array([[0, 2.1], [0.1, 0.1], [0.2, -0.9], [0.3, 0]])),
-    ("data/string.csv", np.array([[(2.2, np.nan), (np.nan, 3.1)]])),
+    ("unit_tests/data/csv_test.csv",
+     np.array([[0, 2.1], [0.1, 0.1], [0.2, -0.9], [0.3, 0]])),
+    ("unit_tests/data/string.csv", np.array([[(2.2, np.nan), (np.nan, 3.1)]])),
     ])
 def test_read_csv(candidate, expected):
 
@@ -26,8 +27,8 @@ def test_read_csv(candidate, expected):
 
 
 @pytest.mark.parametrize("candidate, expected", [
-    ("data/csv_test.csv", True),
-    ("data/string.xlsx", False),
+    ("unit_tests/data/csv_test.csv", True),
+    ("unit_tests/data/string.xlsx", False),
     ])
 def test_verify_csv_extension(candidate, expected):
 

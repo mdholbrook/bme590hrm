@@ -1,4 +1,4 @@
-from functions.load_data import read_csv, clean_data
+from functions.load_data import read_csv, interpolate_nan
 from functions.process_ecg import filter_ecg, r_peak_detection, \
     calculate_metrics
 from functions.write_results import write_json
@@ -10,7 +10,7 @@ def main(file):
     df = read_csv(file)
 
     # Clean input data
-    df = clean_data(df)
+    df = interpolate_nan(df)
 
     # Filter ECG signal
     # df = filter_ecg(df)

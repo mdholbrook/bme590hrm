@@ -6,8 +6,9 @@ from numpy import genfromtxt
 def read_csv(file):
     """Definition of read_csv
 
-    This function takes a filename and reads in a file and outputs its contents.
-    The file should be in csv format and have 2 columns representing time and voltage measurements.
+    This function takes a filename and reads in a file and outputs its
+    contents. The file should be in csv format and have 2 columns representing
+    time and voltage measurements.
 
     Args:
         file: path to a csv file containing ECG data
@@ -28,7 +29,8 @@ def read_csv(file):
 
 
 def verify_csv_extension(file):
-    """Verifies that the extension of the file passed to read_csv denotes a csv file
+    """Verifies that the extension of the file passed to read_csv denotes a
+    csv file
 
     Args:
         file: path to input file
@@ -46,7 +48,7 @@ def verify_csv_extension(file):
     return True
 
 
-def clean_data(df):
+def interpolate_nan(df):
 
     cleaned_df = np.zeros(1)
 
