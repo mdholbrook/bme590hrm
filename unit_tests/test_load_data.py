@@ -1,17 +1,40 @@
 import numpy as np
 import pytest
-from functions.load_data import read_csv, clean_data
+from functions.load_data import read_csv, verify_csv_extension, clean_data
 
-
-def test_read_csv():
-    # Set up correct array
-    correct_array = np.array([[0, 2.1], [0.1, 0.1], [0.2, -0.9], [0.3, 0]])
+@pytest.mark.parametrize("candidate, expected", [
+    ("data/csv_test.csv", np.array([[0, 2.1], [0.1, 0.1], [0.2, -0.9], [0.3, 0]])),
+    ("data/string.csv", np.array([[(2.2, np.nan), (np.nan, 3.1)]])),
+    ])
+def test_read_csv(candidate, expected):
 
     # Run read_csv function
-    data = read_csv('data/csv_test.csv')
-    print(data)
+    data = read_csv(candidate)
 
-    assert (data == correct_array).all()
+    # Compare functions
+    if np.isnan(expected).any():  # if there are strings or missing data
+        print('Is nan')
+        data = data.reshape(-1)
+        expected = expected.reshape(-1)
+        temp = (data == expected) | (np.isnan(data) == np.isnan(expected))
+        comparison = temp.all()
+
+    else:   # if there is not missing data
+        comparison = (data == expected).all()
+
+    assert comparison
+
+
+@pytest.mark.parametrize("candidate, expected", [
+    ("data/csv_test.csv", True),
+    ("data/string.xlsx", False),
+    ])
+def test_verify_csv_extension(candidate, expected):
+
+    # Run verity_csv_extension
+    result = verify_csv_extension(candidate)
+
+    assert result == expected
 
 
 def clean_data(data):
