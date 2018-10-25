@@ -13,7 +13,7 @@ def main(file):
     data = interpolate_nan(data)
 
     # Filter ECG signal
-    # df = filter_ecg(df)
+    data = filter_ecg(data)
 
     # R-peak detection
     # df = r_peak_detection(df)
