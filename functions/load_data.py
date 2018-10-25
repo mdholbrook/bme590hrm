@@ -34,9 +34,10 @@ def verify_csv_extension(file):
     csv file
 
     Args:
-        file (str): path to input file
+        string (str): path to input file
 
     Returns:
+        bool: returns if the input file is a .csv file
 
     """
     # Get extension
@@ -57,11 +58,11 @@ def interpolate_nan(data):
     over those gaps.
 
     Args:
-        data (np array): a numpy array containing time (first col) and ECG
-        (second col) signals
+        data (np array): a numpy array containing time, first col, and
+            ECG, second col, signals
 
     Returns:
-        data (np array): numpy array with interpolated NaN values
+        1D numpy array, float: numpy array with interpolated NaN values
     """
 
     # Find and interpolate over NaN values, time then ECG
@@ -85,7 +86,7 @@ def nan_inds(x):
         x (1D numpy array): a vector (time or ECG) containing NaN values
 
     Returns:
-        nans (1D numpy array, bool): array where True denotes a NaN value
+        1D numpy array, bool: array where True denotes a NaN value
         func (function): a function which return on all non-zero values, used
         to index the interpolation
 

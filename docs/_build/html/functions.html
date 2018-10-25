@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>functions package &mdash; Heart Rate Monitor  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Heart Rate Monitor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">functions package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-functions.load_data">functions.load_data module</a></li>
+<li><a class="reference internal" href="#module-functions.process_ecg">functions.process_ecg module</a></li>
+<li><a class="reference internal" href="#module-functions.write_results">functions.write_results module</a></li>
+<li><a class="reference internal" href="#module-functions">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Heart Rate Monitor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>functions package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/functions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="functions-package">
+<h1>functions package<a class="headerlink" href="#functions-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-functions.load_data">
+<span id="functions-load-data-module"></span><h2>functions.load_data module<a class="headerlink" href="#module-functions.load_data" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="functions.load_data.interpolate_nan">
+<code class="descclassname">functions.load_data.</code><code class="descname">interpolate_nan</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.load_data.interpolate_nan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolates NaN values in the the ECG</p>
+<p>Data passed in may contain NaN values where there were strings or blank
+spaces in the data, causing gaps in the data. This script interpolates
+over those gaps.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>np array</em>) – a numpy array containing time, first col, and
+ECG, second col, signals</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy array with interpolated NaN values</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">1D numpy array, float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.load_data.nan_inds">
+<code class="descclassname">functions.load_data.</code><code class="descname">nan_inds</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.load_data.nan_inds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to handle indices and logical indices of NaNs.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x (1D numpy array): a vector (time or ECG) containing NaN values</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">array where True denotes a NaN value
+func (function): a function which return on all non-zero values, used
+to index the interpolation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">1D numpy array, bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.load_data.non_zero_func">
+<code class="descclassname">functions.load_data.</code><code class="descname">non_zero_func</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.load_data.non_zero_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function which returns non-zero indices of an array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>1d numpy array</em>) – input array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">output non-zero indicies</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">inds (1d numpy array)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.load_data.read_csv">
+<code class="descclassname">functions.load_data.</code><code class="descname">read_csv</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.load_data.read_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Definition of read_csv</p>
+<p>This function takes a filename and reads in a file and outputs its
+contents. The file should be in csv format and have 2 columns representing
+time and voltage measurements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file</strong> (<em>str</em>) – path to a csv file containing ECG data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy array containing two columns, time and ECG
+voltage</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">data (np array)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.load_data.verify_csv_extension">
+<code class="descclassname">functions.load_data.</code><code class="descname">verify_csv_extension</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.load_data.verify_csv_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies that the extension of the file passed to read_csv denotes a
+csv file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>string</strong> (<em>str</em>) – path to input file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">returns if the input file is a .csv file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-functions.process_ecg">
+<span id="functions-process-ecg-module"></span><h2>functions.process_ecg module<a class="headerlink" href="#module-functions.process_ecg" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="functions.process_ecg.calc_beats">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_beats</code><span class="sig-paren">(</span><em>df</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_beats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.calc_duration">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_duration</code><span class="sig-paren">(</span><em>data</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_duration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.calc_mean_hr_bpm">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_mean_hr_bpm</code><span class="sig-paren">(</span><em>df</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_mean_hr_bpm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.calc_num_beats">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_num_beats</code><span class="sig-paren">(</span><em>df</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_num_beats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.calc_voltage_extremes">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_voltage_extremes</code><span class="sig-paren">(</span><em>df</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_voltage_extremes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.calculate_metrics">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">calculate_metrics</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calculate_metrics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.filter_ecg">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">filter_ecg</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.filter_ecg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter the input ECG using a bandpass</p>
+<p>Sequential high and low-pass filters create a bandpass effect. The
+resulting signal will be centered on zero (resting potential).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>2D numpy array</em>) – contains two columns with time and ECG data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">modified array with now-filtered ECG data</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">data (2D numpy array)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.high_pass_filter">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">high_pass_filter</code><span class="sig-paren">(</span><em>volts</em>, <em>kernel_size=401</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.high_pass_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>High pass filtered the ECG signal</p>
+<p>Median filtration will preserve the signal mean around the resting signal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>volts</strong> (<em>1D numpy array</em>) – voltage measurements of ECG</li>
+<li><strong>kernel_size</strong> (<em>int</em>) – size of the median filter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">low pass filtered ECG signal</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">volt_filt (1D numpy array)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.load_rpeak">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">load_rpeak</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.load_rpeak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a sample R-peak for beat detection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">sample waveform, normalized to 1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">rpeak (1D numpy array)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.low_pass_filter">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">low_pass_filter</code><span class="sig-paren">(</span><em>volts</em>, <em>sigma=2</em>, <em>kernel_size=7</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.low_pass_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Low pass filter function to filter ECG</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>volts</strong> (<em>1D numpy array</em>) – voltage measurements of ECG</li>
+<li><strong>sigma</strong> (<em>int</em>) – parameter describing the frequency of the filter</li>
+<li><strong>kernel_size</strong> (<em>int</em>) – size of the Gaussian kernel</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">low pass filtered ECG signal</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">volt_filt (1D numpy array)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.nonmax_supression">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">nonmax_supression</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.nonmax_supression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nonmaximum suppression finds crests of a signal.
+All other non-maxima found from thresholding are suppressed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>1D numpy array</em>) – a thresholded signal</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an array of maxima indexes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">max_locs (1D numpy array)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.normalize_ecg">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">normalize_ecg</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.normalize_ecg" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function normalizes the ECG signal.</p>
+<p>This function scales the signal into a standard range, with R-peaks being
+brought near 1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>2D numpy array</em>) – contains two columns with time and ECG data</td>
+</tr>
+</tbody>
+</table>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.r_peak_detection">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">r_peak_detection</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.r_peak_detection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detection of R-peaks in an ECG signal</p>
+<p>This function loads a sample QRS complex and computes a corrlation on an
+input ECG signal. Areas of high correction are found via thresholding and
+nonmaximum suppression is used to detect maxima (R-peak locations).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>2D numpy array</em>) – contains two columns with time and ECG data</td>
+</tr>
+</tbody>
+</table>
+<p>Returns:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-functions.write_results">
+<span id="functions-write-results-module"></span><h2>functions.write_results module<a class="headerlink" href="#module-functions.write_results" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="functions.write_results.write_json">
+<code class="descclassname">functions.write_results.</code><code class="descname">write_json</code><span class="sig-paren">(</span><em>df</em>, <em>file_descriptor</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.write_results.write_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-functions">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-functions" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Matt Holbrook
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
