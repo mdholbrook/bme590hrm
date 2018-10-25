@@ -22,7 +22,7 @@ def main(file):
     rpeak_locs = r_peak_detection(data_filt)
 
     # Calculate metrics
-    # metrics = calculate_metrics(df)
+    metrics = calculate_metrics(data, data_filt, rpeak_locs)
 
     # Write results
     # write_json(metrics)
