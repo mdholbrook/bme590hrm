@@ -1,6 +1,6 @@
 from functions.load_data import read_csv, interpolate_nan
-from functions.process_ecg import filter_ecg, r_peak_detection, \
-    calculate_metrics
+from functions.process_ecg import filter_ecg, r_peak_detection
+from functions.process_ecg import normalize_ecg, calculate_metrics
 from functions.write_results import write_json
 
 
@@ -13,10 +13,13 @@ def main(file):
     data = interpolate_nan(data)
 
     # Filter ECG signal
-    data = filter_ecg(data)
+    data_filt = filter_ecg(data)
+
+    # Normalize ECG
+    data_filt = normalize_ecg(data_filt)
 
     # R-peak detection
-    # df = r_peak_detection(df)
+    rpeak_locs = r_peak_detection(data_filt)
 
     # Calculate metrics
     # metrics = calculate_metrics(df)
