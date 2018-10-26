@@ -2,12 +2,9 @@ import numpy as np
 from functions.process_ecg import calc_duration
 
 
-def calculate_metrics(data, data_filt, rpeak_locs):
+def calculate_metrics(data, data_filt, rpeak_locs, duration):
 
     metrics = {}
-
-    # Calculate mean heart rate
-    # metrics = calc_mean_hr_bpm(df, metrics)
 
     # Calculate voltage extremes
     metrics = calc_voltage_extremes(data, metrics)
@@ -21,12 +18,39 @@ def calculate_metrics(data, data_filt, rpeak_locs):
     # Calculate time when beats occur
     metrics = calc_beats(data_filt, rpeak_locs, metrics)
 
+    # Calculate mean heart rate
+    metrics = calc_mean_hr_bpm(duration, metrics)
+
     return metrics
 
 
-def calc_mean_hr_bpm(df, metrics):
+def calc_mean_hr_bpm(duration, metrics):
+    """Calculate the heart rate within an interval
 
-    metrics['mean_hr_bme'] = np.zeros(1)
+    The user inputs an interval in minutes via the command line. The average
+    heart rate is calculated within this interval.
+
+    Args:
+        duration (tubple): contains the start and stop times that the user
+            wants heart rate information for.
+        metrics (dictionary): a dictionary of calculated metrics from the
+            input ECG.
+
+    Returns:
+        dictionary: A dictionary field containing a float of the average
+            beats per minute over the specified interval.
+    """
+
+    # Get duration indices specified by the user
+    start_ind = metrics['beats'] >= duration[0]
+    end_ind = metrics['beats'] >= duration[1]
+
+    # Get list of times for each beat, in seconds, during the interval
+    beats = metrics['beats'][start_ind:end_ind]
+    bpm = np.mean(beats[1:] - beats[:-1]) * 60  # [beats per min]
+
+    # Assign bpm to the dictionary
+    metrics['mean_hr_bme'] = bpm
 
     return metrics
 
