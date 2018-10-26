@@ -124,7 +124,8 @@ def r_peak_detection(data):
     nonmaximum suppression is used to detect maxima (R-peak locations).
 
     Args:
-        data (2D numpy array): contains two columns with time and ECG data
+        2D numpy array: array with two columns columns containing time and ECG
+            data
 
     Returns:
 
@@ -162,7 +163,7 @@ def nonmax_supression(x):
         x (1D numpy array): a thresholded signal
 
     Returns:
-        max_locs (1D numpy array): an array of maxima indexes
+        floats, 1D numpy array: an array of maxima indexes
     """
 
     # Get a list of indices which can shift the vector
@@ -187,7 +188,7 @@ def load_rpeak():
     """Loads a sample R-peak for beat detection
 
     Returns:
-        rpeak (1D numpy array): sample waveform, normalized to 1
+        floats, 1D numpy array: sample waveform, normalized to 1
     """
 
     # Load sample R-peak

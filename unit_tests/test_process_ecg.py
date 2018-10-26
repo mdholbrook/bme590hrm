@@ -1,7 +1,7 @@
 import pytest
 from functions.process_ecg import filter_ecg, high_pass_filter, low_pass_filter
 from functions.process_ecg import normalize_ecg, nonmax_supression, load_rpeak
-from functions.process_ecg import r_peak_detection
+from functions.process_ecg import r_peak_detection, calc_duration
 import numpy as np
 
 
@@ -141,3 +141,18 @@ def test_rpeak_detection():
     result_loc = r_peak_detection(data)
 
     assert result_loc == expected_loc
+
+
+def test_calc_duration():
+
+    # Set up test data
+    duration = 10
+    data = np.zeros((100, 2))
+    data[:, 0] = np.linspace(0, duration, 100)  # time vector
+
+    metrics = {}
+
+    # Test the function
+    metrics = calc_duration(data, metrics)
+
+    assert metrics['duration'] == duration
