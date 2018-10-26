@@ -1,6 +1,7 @@
 import pytest
 import numpy as np
 from functions.calculate_metrics import calc_num_beats, calc_beats
+from functions.calculate_metrics import calc_voltage_extremes
 
 
 def test_calc_num_beats():
@@ -36,3 +37,15 @@ def test_calc_beats():
     metrics = calc_beats(data, rpeak_locs=locs, metrics=metrics)
 
     assert (metrics['beats'] == times).all()
+
+
+def test_calc_voltage_extremes():
+
+    # Set up test data
+    data = np.array([[0, 1, 2, 3, 4, 5], [-1, -1.1, 0.9, 2.2, 0.2, -0.1]]).T
+
+    # Run the function
+    metrics = {}
+    metrics = calc_voltage_extremes(data, metrics)
+
+    assert (metrics['voltage_extremes'] == [-1.1, 2.2])

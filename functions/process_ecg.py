@@ -44,8 +44,6 @@ def low_pass_filter(volts, sigma=2, kernel_size=7):
     """
 
     # Create Gaussian LP kernel
-    sigma = 2
-    kernel_size = 9
     kernel = (1/(sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * (np.arange(
         -kernel_size//2 + 1, kernel_size//2 + 1, 1)/sigma)**2)
 
@@ -170,9 +168,9 @@ def nonmax_supression(x):
     inds = np.arange(1, len(x)-1, 1)
 
     # Compare to the right and left of each point
-    compareL = (x[1:-1] - x[inds-1]) > 0
-    compareR = (x[1:-1] - x[inds+1]) > 0
-    compare = compareL * compareR
+    comparel = (x[1:-1] - x[inds-1]) > 0
+    comparer = (x[1:-1] - x[inds+1]) > 0
+    compare = comparel * comparer
 
     # Compute max indexes
     max_inds = np.zeros(len(x), dtype=bool)
@@ -204,11 +202,12 @@ def calc_duration(data, metrics):
 
     Args:
         data (2D numpy array): contains two columns with time and ECG data
-        metrics (float): dictionary containing ECG metrics
+        metrics (dictionary): dictionary containing ECG metrics
 
 
     Returns:
-        float, seconds: dictionary with 'duration' field containing an float in seconds
+        float, seconds: dictionary with 'duration' field containing an float
+            in seconds
     """
 
     # Get test duration

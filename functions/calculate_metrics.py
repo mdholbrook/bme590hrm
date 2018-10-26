@@ -42,7 +42,7 @@ def calc_voltage_extremes(data, metrics):
 
     Returns:
         list, float, volts: the minimum and maximum voltages recorded during
-            the monitoring period.
+            the monitoring period under a dictionary label 'voltage_extremes'.
     """
 
     # Get ECG voltage
