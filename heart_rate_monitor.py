@@ -1,7 +1,7 @@
 from functions.load_data import read_csv, interpolate_nan
 from functions.process_ecg import filter_ecg, r_peak_detection
 from functions.process_ecg import normalize_ecg, calculate_metrics
-from functions.write_results import write_json
+from functions.write_results import write_results_to_file
 
 
 def main(file):
@@ -25,7 +25,7 @@ def main(file):
     metrics = calculate_metrics(data, data_filt, rpeak_locs)
 
     # Write results
-    write_json(metrics, file)
+    write_results_to_file(metrics, file)
 
 
 if __name__ == "__main__":

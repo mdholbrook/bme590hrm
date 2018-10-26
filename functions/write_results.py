@@ -2,7 +2,7 @@ import os
 import json
 
 
-def write_json(metrics, filename):
+def write_results_to_file(metrics, filename):
     """Writes the calculated metrics in a JSON file.
 
     This function takes the metrics and filename of the input csv file. It
@@ -27,8 +27,7 @@ def write_json(metrics, filename):
     filename = gen_save_filename(filename, save_path)
 
     # Write calculated metrics to a JSON file
-    with open(filename, 'w') as fp:
-        json.dump(metrics, fp)
+    write_json(metrics, filename)
 
 
 def gen_save_filename(filename, save_path):
@@ -70,7 +69,7 @@ def gen_outpath(save_path):
         save_path (str): relative path to a folder in which to save the output.
 
     Returns:
-
+        bool: value indicating if the output folder was successfully created.
     """
 
     # Strip leading slashes
@@ -81,4 +80,30 @@ def gen_outpath(save_path):
     save_path = os.path.abspath(save_path)
 
     if not os.path.exists(save_path):
-        os.mkdir(save_path)
+        try:
+            os.mkdir(save_path)
+        except FileNotFoundError('Cannot make the directory:\n\t%s' %save_path):
+            print('Please ensure base directory exists')
+
+
+def write_json(metrics, filename):
+    """Function writes metrics to a JSON file.
+
+    Args:
+        metrics (dict): dictionary containing calculated metrics for the ECG.
+        filename (str): filename, including path, of the JSON file to be
+            written.
+
+    Returns:
+
+    """
+
+    # Write calculated metrics to a JSON file
+    try:
+        with open(filename, 'w') as fp:
+            json.dump(metrics, fp)
+
+        print('Output file written to:\n\t%s' % filename)
+
+    except FileNotFoundError('Cannot access file for writing!'):
+        print('Cannot access %s' % filename)

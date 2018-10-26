@@ -1,6 +1,7 @@
 import pytest
 import os
 from functions.write_results import gen_save_filename, gen_outpath
+from functions.write_results import write_json
 
 
 @pytest.mark.parametrize("input_file, expected", [
