@@ -18,10 +18,15 @@ def read_csv(filename):
         voltage
     """
 
+    # Verify the existence of the file
+    verify = os.path.exists(filename)
+    if not verify:
+        raise IOError('The input file given does not exist!')
+
     # Verify that the input file is a csv
     verify = verify_csv_extension(filename)
     if not verify:
-        raise ValueError('Please input a valid .csv file')
+        raise ValueError('Please input a valid .csv file!')
 
     # Read from csv file
     data = genfromtxt(filename, dtype='float', delimiter=',', autostrip=True)
