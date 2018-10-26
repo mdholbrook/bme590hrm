@@ -2,7 +2,22 @@ import os
 import json
 
 
-def write_json(df, filename):
+def write_json(metrics, filename):
+    """Writes the calculated metrics in a JSON file.
+
+    This function takes the metrics and filename of the input csv file. It
+    generates an output folder and makes a new file in that folder named after
+    the input csv file. The metrics calculated in the previous parts of the
+    code are written to this file.
+
+    Args:
+        metrics (dict: a dictionary containing all of the metrics calculated by
+            this program on the ECG.
+        filename (str): name of the input csv file.
+
+    Returns:
+
+    """
 
     # Generate save_path
     save_path = 'output_data'
@@ -13,7 +28,7 @@ def write_json(df, filename):
 
     # Write calculated metrics to a JSON file
     with open(filename, 'w') as fp:
-        json.dump(df, fp)
+        json.dump(metrics, fp)
 
 
 def gen_save_filename(filename, save_path):
