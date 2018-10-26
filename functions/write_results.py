@@ -105,5 +105,5 @@ def write_json(metrics, filename):
 
         print('Output file written to:\n\t%s' % filename)
 
-    except FileNotFoundError('Cannot access file for writing!'):
-        print('Cannot access %s' % filename)
+    except:
+        raise FileNotFoundError('Cannot access file for writing!')

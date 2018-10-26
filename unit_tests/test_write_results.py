@@ -1,5 +1,4 @@
-import pytest
-import os
+import pytest, os, json
 from functions.write_results import gen_save_filename, gen_outpath
 from functions.write_results import write_json
 
@@ -32,3 +31,35 @@ def test_gen_outpath(input_str, expected):
 
     # Remove test folders
     os.rmdir(expected)
+
+
+@pytest.mark.parametrize("filename, expected", [
+    ('happy.json', True),
+    ('test.json', True),
+    ('for/me.json', False)
+])
+def test_write_json(filename, expected):
+
+    # Set up input data
+    metrics = {'test': 'some text'}
+
+    # Run code
+    if filename == 'for/me.json':  # An exception for a nonexistent folder
+
+        with pytest.raises(FileNotFoundError):
+            write_json(metrics, filename)
+
+    else:
+        write_json(metrics, filename)
+
+        # Check file existence
+        assert os.path.exists(filename) == expected
+
+        # Check the contents of the file
+        with open(filename, 'r') as f:
+            test = json.load(f)
+
+        assert metrics['test'] == test['test']
+
+        # Remove dummy file
+        os.remove(filename)
