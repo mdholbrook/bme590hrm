@@ -6,11 +6,18 @@ def calculate_metrics(data, data_filt, rpeak_locs, duration):
 
     metrics = {}
 
-    # Calculate voltage extremes
-    metrics = calc_voltage_extremes(data, metrics)
-
     # Calculate duration
     metrics = calc_duration(data, metrics)
+
+    # Check input duration to calculalted duration
+    try:
+        check_input_duration(duration, metrics)
+    except ValueError:
+        print('Proceeding using the entire ECG range.')
+        duration = (0, metrics['duration'])
+
+    # Calculate voltage extremes
+    metrics = calc_voltage_extremes(data, metrics)
 
     # Calculate number of beads in a strip
     metrics = calc_num_beats(rpeak_locs, metrics)
@@ -22,6 +29,35 @@ def calculate_metrics(data, data_filt, rpeak_locs, duration):
     metrics = calc_mean_hr_bpm(duration, metrics)
 
     return metrics
+
+
+def check_input_duration(duration, metrics):
+    """Checks if the time duration input by the user falls within the ECG file.
+
+    Args:
+        duration (tuple): contains start and stop times in minutes as input
+            by the user
+        metrics (dict): dictionary of ECG metrics calculated by the program.
+
+    Returns:
+        bool: returns true is the input duration is within the ECG signal
+            otherwise an error is raised.
+    """
+
+    # Get the specified duration in seconds
+    duration_seconds = duration[1]
+    duration_seconds *= 60
+
+    # Compare against the duration of the ECG signal
+    within_signal = duration_seconds <= metrics['duration']
+
+    if not within_signal:
+        raise ValueError('Invalid input final bound (%0.2f minutes) which is '
+                         'greater than ECG duration (%0.2f minutes)!'
+                         % (duration_seconds/60, (metrics['duration']/60)))
+
+    else:
+        return True
 
 
 def calc_mean_hr_bpm(duration, metrics):
