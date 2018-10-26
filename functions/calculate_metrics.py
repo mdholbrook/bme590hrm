@@ -136,7 +136,7 @@ def calc_num_beats(rpeak_locs, metrics):
     """
 
     # Add the number of beats
-    num_beats = np.sum(rpeak_locs)
+    num_beats = len(rpeak_locs)
     metrics['num_beats'] = int(num_beats)
 
     return metrics
