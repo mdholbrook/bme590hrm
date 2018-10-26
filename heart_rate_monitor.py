@@ -1,13 +1,19 @@
+import sys
 from functions.load_data import read_csv, interpolate_nan
 from functions.process_ecg import filter_ecg, r_peak_detection
-from functions.process_ecg import normalize_ecg, calculate_metrics
+from functions.process_ecg import normalize_ecg
+from functions.calculate_metrics import calculate_metrics
 from functions.write_results import write_results_to_file
+from functions.user_inputs import parse_user_inputs
 
 
-def main(file):
+def main(user_input):
+
+    # Parse user inputs
+    filename, duration = parse_user_inputs(user_input)
 
     # Read in data
-    data = read_csv(file)
+    data = read_csv(filename)
 
     # Clean input data
     data = interpolate_nan(data)
@@ -22,13 +28,14 @@ def main(file):
     rpeak_locs = r_peak_detection(data_filt)
 
     # Calculate metrics
-    metrics = calculate_metrics(data, data_filt, rpeak_locs)
+    metrics = calculate_metrics(data, data_filt, rpeak_locs, duration)
 
     # Write results
-    write_results_to_file(metrics, file)
+    write_results_to_file(metrics, filename)
 
 
 if __name__ == "__main__":
 
-    filename = 'test_data/test_data1.csv'
-    main(filename)
+    user_input = sys.argv
+
+    main(user_input)
