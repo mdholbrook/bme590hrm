@@ -202,11 +202,11 @@ def calc_duration(data, metrics):
 
     Args:
         data (2D numpy array): contains two columns with time and ECG data
-        metrics (dictionary): dictionary containing ECG metrics
+        metrics (dict): dictionary containing ECG metrics
 
 
     Returns:
-        float, seconds: dictionary with 'duration' field containing an float
+        dict: dictionary with 'duration' field containing an float
             in seconds
     """
 

@@ -73,7 +73,7 @@ def calc_mean_hr_bpm(duration, metrics):
             input ECG.
 
     Returns:
-        dictionary: A dictionary field containing a float of the average
+        dict: A dictionary field containing a float of the average
             beats per minute over the specified interval.
     """
 
@@ -98,7 +98,7 @@ def calc_voltage_extremes(data, metrics):
         data (2D numpy array): contains time and voltage information from the
             input ECG. This data is input pre-filtering so the input range is
             not altered.
-        metrics (dictionary): contains calculated ECG metrics
+        metrics (dict): contains calculated ECG metrics
 
     Returns:
         tuple, float: the minimum and maximum voltages recorded during
@@ -125,11 +125,11 @@ def calc_num_beats(rpeak_locs, metrics):
 
     Args:
         rpeak_locs (1D numpy array): index locations of R-peaks in an ECG.
-        metrics (dictionary): dictionary containing the metrics which will be
+        metrics (dict): dictionary containing the metrics which will be
             returned at the end of the program.
 
     Returns:
-        int: dictionary with added field for the number of beats
+        dict: dictionary with added field for the number of beats
     """
 
     # Add the number of beats
@@ -145,7 +145,7 @@ def calc_beats(data, rpeak_locs, metrics):
     Args:
         data (2D numpy array): contains two columns with time and ECG data
         rpeak_locs (1D numpy array): contains locations of R-peaks
-        metrics (dictionary): dictionary containing the metrics calculated
+        metrics (dict): dictionary containing the metrics calculated
             by this program.
 
     Returns:
