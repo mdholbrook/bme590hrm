@@ -25,7 +25,7 @@ def main(file):
     metrics = calculate_metrics(data, data_filt, rpeak_locs)
 
     # Write results
-    # write_json(metrics)
+    write_json(metrics, file)
 
 
 if __name__ == "__main__":
