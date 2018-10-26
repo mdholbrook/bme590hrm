@@ -2,6 +2,16 @@ import warnings
 
 
 def parse_user_inputs(user_inputs):
+    """Function that parses user inputs via the command line
+
+    Args:
+        user_inputs (list): a list of inputs from the command line. The first
+            index is the name of the file being run, followed by user inputs.
+
+    Returns:
+        str: parsed filename
+        list: list of start and end duration of the ECG to analyse in minutes
+    """
 
     # Get the size of the user inputs
     argc = len(user_inputs)
