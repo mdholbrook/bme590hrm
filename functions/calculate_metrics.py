@@ -15,7 +15,7 @@ def calculate_metrics(data, data_filt, rpeak_locs, duration):
         check_input_duration(duration, metrics)
     except ValueError:
         print('Proceeding using the entire ECG range.')
-        duration = (0, metrics['duration'])
+        duration = (0, metrics['duration']/60)
 
     # Calculate voltage extremes
     metrics = calc_voltage_extremes(data, metrics)
@@ -86,7 +86,7 @@ def calc_mean_hr_bpm(duration, metrics):
 
     # Get list of times for each beat, in seconds, during the interval
     beat_times = beats[start_ind*end_ind]
-    bpm = np.mean(beat_times[1:] - beat_times[:-1]) * 60  # [beats per min]
+    bpm = 60 / np.mean(beat_times[1:] - beat_times[:-1])  # [beats per min]
 
     # Assign bpm to the dictionary
     metrics['mean_hr_bpm'] = bpm
