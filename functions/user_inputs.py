@@ -24,21 +24,24 @@ def parse_user_inputs(user_inputs):
 
         raise Exception('Please enter the path to an input file '
                         'using the command line!')
+
     else:
 
         filename = user_inputs[1]
+
+    if argc == 2:
+
         warnings.warn('No durations given via the command line,'
                       ' using full duration of ECG')
 
-    if argc == 3:  # If only one duration value is given
+    elif argc == 3:  # If only one duration value is given
 
         warnings.warn('Two durations not given via the command line,'
                       ' using the given duration from the start of the ECG')
 
-        duration[0] = 0
         duration[1] = float(user_inputs[2])
 
-    if argc == 4:  # If both durations are given
+    elif argc == 4:  # If both durations are given
 
         duration[0] = float(user_inputs[2])
         duration[1] = float(user_inputs[3])
