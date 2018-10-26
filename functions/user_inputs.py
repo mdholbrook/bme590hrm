@@ -82,4 +82,3 @@ def verify_numeric_inputs(input_num):
 
     except ValueError:
         return False
-
