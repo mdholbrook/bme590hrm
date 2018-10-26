@@ -54,8 +54,8 @@ def check_input_duration(duration, metrics):
 
     if not within_signal:
         print('Invalid input final bound (%0.2f minutes) is '
-                         'greater than ECG duration (%0.2f minutes)!'
-                         % (duration_seconds/60, (metrics['duration']/60)))
+              'greater than ECG duration (%0.2f minutes)!'
+              % (duration_seconds/60, (metrics['duration']/60)))
         raise ValueError
 
     else:

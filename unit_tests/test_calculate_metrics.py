@@ -10,9 +10,7 @@ def test_calc_num_beats():
 
     # Set up test data - num_beats will be inserted into an array
     num_beats = int(100)
-    rpeak_locs = np.zeros(1000)
-    inds_one = np.random.choice(1000, num_beats, False)
-    rpeak_locs[inds_one] = 1
+    rpeak_locs = np.random.choice(1000, num_beats)
 
     # Dummy metric dictionary
     metrics = {}
