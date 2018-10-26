@@ -48,4 +48,4 @@ def test_calc_voltage_extremes():
     metrics = {}
     metrics = calc_voltage_extremes(data, metrics)
 
-    assert (metrics['voltage_extremes'] == [-1.1, 2.2])
+    assert (metrics['voltage_extremes'] == (-1.1, 2.2))

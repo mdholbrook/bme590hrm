@@ -41,7 +41,7 @@ def calc_voltage_extremes(data, metrics):
         metrics (dictionary): contains calculated ECG metrics
 
     Returns:
-        list, float, volts: the minimum and maximum voltages recorded during
+        tuple, float: the minimum and maximum voltages recorded during
             the monitoring period under a dictionary label 'voltage_extremes'.
     """
 
@@ -49,7 +49,7 @@ def calc_voltage_extremes(data, metrics):
     volts = data[:, 1]
 
     # Calculate voltage extremes and place into a list
-    volts_extremes = [volts.min(), volts.max()]
+    volts_extremes = (volts.min(), volts.max())
 
     # Update the dictionary
     metrics['voltage_extremes'] = volts_extremes
