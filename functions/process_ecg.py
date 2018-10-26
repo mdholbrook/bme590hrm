@@ -198,42 +198,6 @@ def load_rpeak():
     return rpeak
 
 
-def calculate_metrics(df):
-
-    metrics = {}
-
-    # Calculate mean heart rate
-    metrics = calc_mean_hr_bpm(df, metrics)
-
-    # Calculate voltage extremes
-    metrics = calc_voltage_extremes(df, metrics)
-
-    # Calculate duration
-    metrics = calc_duration(df, metrics)
-
-    # Calculate number of beads in a strip
-    metrics = calc_num_beats(df, metrics)
-
-    # Calculate time when beats occur
-    metrics = calc_beats(df, metrics)
-
-    return metrics
-
-
-def calc_mean_hr_bpm(df, metrics):
-
-    metrics['mean_hr_bme'] = np.zeros(1)
-
-    return metrics
-
-
-def calc_voltage_extremes(df, metrics):
-
-    metrics['voltage_extremes'] = np.zeros(1)
-
-    return metrics
-
-
 def calc_duration(data, metrics):
 
     # Get test duration
@@ -241,19 +205,5 @@ def calc_duration(data, metrics):
     duration = time[-1] - time[0]
 
     metrics['duration'] = duration
-
-    return metrics
-
-
-def calc_num_beats(df, metrics):
-
-    metrics['num_beats'] = np.zeros(1)
-
-    return metrics
-
-
-def calc_beats(df, metrics):
-
-    metrics['beats'] = np.zeros(1)
 
     return metrics
