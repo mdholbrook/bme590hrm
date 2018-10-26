@@ -13,7 +13,7 @@ def calculate_metrics(data, data_filt, rpeak_locs):
     # metrics = calc_voltage_extremes(df, metrics)
 
     # Calculate duration
-    # metrics = calc_duration(df, metrics)
+    metrics = calc_duration(data, metrics)
 
     # Calculate number of beads in a strip
     metrics = calc_num_beats(rpeak_locs, metrics)

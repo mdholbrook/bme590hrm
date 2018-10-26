@@ -199,6 +199,16 @@ def load_rpeak():
 
 
 def calc_duration(data, metrics):
+    """Calculate the duration of the ECG strip
+
+    Args:
+        data (2D numpy array): contains two columns with time and ECG data
+        metrics (float): dictionary containing ECG metrics
+
+
+    Returns:
+        float: dictionary with 'duration' field containing an float in seconds
+    """
 
     # Get test duration
     time = data[:, 0]
