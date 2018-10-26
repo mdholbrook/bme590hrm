@@ -82,7 +82,9 @@ def gen_outpath(save_path):
     if not os.path.exists(save_path):
         try:
             os.mkdir(save_path)
-        except FileNotFoundError('Cannot make the directory:\n\t%s' %save_path):
+        except Exception:
+            raise FileNotFoundError('Cannot make the '
+                                    'directory:\n\t%s' % save_path)
             print('Please ensure base directory exists')
 
 

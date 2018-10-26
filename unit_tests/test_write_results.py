@@ -1,4 +1,6 @@
-import pytest, os, json
+import pytest
+import os
+import json
 from functions.write_results import gen_save_filename, gen_outpath
 from functions.write_results import write_json
 
@@ -11,7 +13,8 @@ from functions.write_results import write_json
 def test_gen_save_filename(input_file, expected):
 
     # Run the test
-    result = gen_save_filename(input_file)
+    save_path = 'output_data'
+    result = gen_save_filename(input_file, save_path)
 
     assert result == expected
 
