@@ -208,7 +208,7 @@ def calc_duration(data, metrics):
 
 
     Returns:
-        float: dictionary with 'duration' field containing an float in seconds
+        float, seconds: dictionary with 'duration' field containing an float in seconds
     """
 
     # Get test duration
