@@ -221,7 +221,7 @@ to index the interpolation</td>
 
 <dl class="function">
 <dt id="functions.load_data.read_csv">
-<code class="descclassname">functions.load_data.</code><code class="descname">read_csv</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.load_data.read_csv" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">functions.load_data.</code><code class="descname">read_csv</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.load_data.read_csv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Definition of read_csv</p>
 <p>This function takes a filename and reads in a file and outputs its
 contents. The file should be in csv format and have 2 columns representing
@@ -230,12 +230,12 @@ time and voltage measurements.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file</strong> (<em>str</em>) – path to a csv file containing ECG data</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – path to a csv file containing ECG data</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy array containing two columns, time and ECG
 voltage</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">data (np array)</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy array</td>
 </tr>
 </tbody>
 </table>
@@ -264,33 +264,8 @@ csv file</p>
 <div class="section" id="module-functions.process_ecg">
 <span id="functions-process-ecg-module"></span><h2>functions.process_ecg module<a class="headerlink" href="#module-functions.process_ecg" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="functions.process_ecg.calc_beats">
-<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_beats</code><span class="sig-paren">(</span><em>df</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_beats" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
 <dt id="functions.process_ecg.calc_duration">
 <code class="descclassname">functions.process_ecg.</code><code class="descname">calc_duration</code><span class="sig-paren">(</span><em>data</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_duration" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="functions.process_ecg.calc_mean_hr_bpm">
-<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_mean_hr_bpm</code><span class="sig-paren">(</span><em>df</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_mean_hr_bpm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="functions.process_ecg.calc_num_beats">
-<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_num_beats</code><span class="sig-paren">(</span><em>df</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_num_beats" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="functions.process_ecg.calc_voltage_extremes">
-<code class="descclassname">functions.process_ecg.</code><code class="descname">calc_voltage_extremes</code><span class="sig-paren">(</span><em>df</em>, <em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calc_voltage_extremes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="functions.process_ecg.calculate_metrics">
-<code class="descclassname">functions.process_ecg.</code><code class="descname">calculate_metrics</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.calculate_metrics" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">

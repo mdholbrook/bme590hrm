@@ -19,7 +19,7 @@ def calculate_metrics(data, data_filt, rpeak_locs):
     metrics = calc_num_beats(rpeak_locs, metrics)
 
     # Calculate time when beats occur
-    # metrics = calc_beats(df, metrics)
+    metrics = calc_beats(data_filt, rpeak_locs, metrics)
 
     return metrics
 
@@ -50,18 +50,32 @@ def calc_num_beats(rpeak_locs, metrics):
             returned at the end of the program.
 
     Returns:
-        metrics: dictionary with added field for the number of beats
+        int: dictionary with added field for the number of beats
     """
 
     # Add the number of beats
-    num_beats = np.sum(rpeak_locs)
+    num_beats = np.sum(rpeak_locs, dtype=int)
     metrics['num_beats'] = num_beats
 
     return metrics
 
 
-def calc_beats(data, metrics):
+def calc_beats(data, rpeak_locs, metrics):
+    """Returns the times when R-peaks occur
 
-    metrics['beats'] = np.zeros(1)
+    Args:
+        data (2D numpy array): contains two columns with time and ECG data
+        rpeak_locs (1D numpy array): contains locations of R-peaks
+        metrics (dictionary): dictionary containing the metrics calculated
+            by this program.
+
+    Returns:
+        numpy array: dictionary with added field for heart beat times
+    """
+
+    time = data[:, 0]
+    beat_time = time[rpeak_locs]
+
+    metrics['beats'] = beat_time
 
     return metrics

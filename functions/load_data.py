@@ -3,7 +3,7 @@ import numpy as np
 from numpy import genfromtxt
 
 
-def read_csv(file):
+def read_csv(filename):
     """Definition of read_csv
 
     This function takes a filename and reads in a file and outputs its
@@ -11,20 +11,20 @@ def read_csv(file):
     time and voltage measurements.
 
     Args:
-        file (str): path to a csv file containing ECG data
+        filename (str): path to a csv file containing ECG data
 
     Returns:
-        data (np array): numpy array containing two columns, time and ECG
+        numpy array: numpy array containing two columns, time and ECG
         voltage
     """
 
     # Verify that the input file is a csv
-    verify = verify_csv_extension(file)
+    verify = verify_csv_extension(filename)
     if not verify:
         raise ValueError('Please input a valid .csv file')
 
     # Read from csv file
-    data = genfromtxt(file, dtype='float', delimiter=',', autostrip=True)
+    data = genfromtxt(filename, dtype='float', delimiter=',', autostrip=True)
 
     return data
 
