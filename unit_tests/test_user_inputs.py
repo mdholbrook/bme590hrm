@@ -1,4 +1,4 @@
-from functions.user_inputs import parse_user_inputs
+from functions.user_inputs import parse_user_inputs, verify_numeric_inputs
 import pytest
 
 
@@ -20,3 +20,15 @@ def test_parse_user_input(inputs, expected):
     else:
         with pytest.raises(Exception):
             parse_user_inputs(inputs)
+
+
+@pytest.mark.parametrize("inputs, expected", [
+    ('test', False),
+    ('1f2c', False),
+    ('12', True),
+    ('0.0023', True),
+])
+def test_verify_numeric_inputs(inputs, expected):
+
+    # Run the function
+    assert verify_numeric_inputs(inputs) == expected
