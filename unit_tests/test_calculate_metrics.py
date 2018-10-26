@@ -2,6 +2,8 @@ import pytest
 import numpy as np
 from functions.calculate_metrics import calc_num_beats, calc_beats
 from functions.calculate_metrics import calc_voltage_extremes
+from functions.calculate_metrics import check_input_duration
+from functions.calculate_metrics import calc_mean_hr_bpm
 
 
 def test_calc_num_beats():
@@ -49,3 +51,38 @@ def test_calc_voltage_extremes():
     metrics = calc_voltage_extremes(data, metrics)
 
     assert (metrics['voltage_extremes'] == (-1.1, 2.2))
+
+
+@pytest.mark.parametrize("duration, expected", [
+    ((3, 6), False),
+    ((0, 2), True),
+    ((0, 5), False)
+    ])
+def test_check_input_duration(duration, expected):
+
+    # Set up data
+    metrics = {}
+    metrics['duration'] = 140
+
+    # Run the function
+    try:
+        output = check_input_duration(duration, metrics)
+    except ValueError:
+        output = False
+
+    assert output == expected
+
+
+def test_calc_mean_hr_bpm():
+
+    # Set up test data
+    duration = (1, 2)  # [min]
+    beats_per_second = 1.2
+    metrics = {}
+    metrics['beats'] = np.arange(0, 180, beats_per_second)  # [sec]
+    bpm = beats_per_second * 60
+
+    # Call the function
+    metrics = calc_mean_hr_bpm(duration, metrics)
+
+    assert metrics['mean_hr_bpm'] == bpm
