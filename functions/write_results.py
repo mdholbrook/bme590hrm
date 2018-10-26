@@ -5,17 +5,18 @@ import json
 def write_json(df, filename):
 
     # Generate save_path
-    gen_outpath(save_path='output_data')
+    save_path = 'output_data'
+    gen_outpath(save_path)
 
     # Generate a save filename based on the csv file
-    filename = gen_save_filename(filename)
+    filename = gen_save_filename(filename, save_path)
 
     # Write calculated metrics to a JSON file
     with open(filename, 'w') as fp:
         json.dump(df, fp)
 
 
-def gen_save_filename(filename):
+def gen_save_filename(filename, save_path):
     """Generates the filename in which to save the results.
 
     The filename will be the same as the input filename. The data will be
@@ -42,7 +43,7 @@ def gen_save_filename(filename):
 
     name = name[-1]
 
-    new_filename = 'output_data/' + name + '.json'
+    new_filename = save_path + '/' + name + '.json'
 
     return new_filename
 
@@ -57,6 +58,11 @@ def gen_outpath(save_path):
 
     """
 
+    # Strip leading slashes
+    save_path = save_path.strip('/')
+    save_path = save_path.strip('\\')
+
+    # Generate absolute path
     save_path = os.path.abspath(save_path)
 
     if not os.path.exists(save_path):
