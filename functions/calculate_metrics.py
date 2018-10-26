@@ -1,4 +1,5 @@
 import numpy as np
+from functions.process_ecg import calc_duration
 
 
 def calculate_metrics(data, data_filt, rpeak_locs):
@@ -37,17 +38,6 @@ def calc_voltage_extremes(df, metrics):
     return metrics
 
 
-def calc_duration(data, metrics):
-
-    # Get test duration
-    time = data[:, 0]
-    duration = time[-1] - time[0]
-
-    metrics['duration'] = duration
-
-    return metrics
-
-
 def calc_num_beats(rpeak_locs, metrics):
     """Calculates the number of beats in an ECG
 
@@ -71,7 +61,6 @@ def calc_num_beats(rpeak_locs, metrics):
 
 
 def calc_beats(data, metrics):
-
 
     metrics['beats'] = np.zeros(1)
 

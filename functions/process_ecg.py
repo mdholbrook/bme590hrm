@@ -196,3 +196,14 @@ def load_rpeak():
     f.close()
 
     return rpeak
+
+
+def calc_duration(data, metrics):
+
+    # Get test duration
+    time = data[:, 0]
+    duration = time[-1] - time[0]
+
+    metrics['duration'] = duration
+
+    return metrics
