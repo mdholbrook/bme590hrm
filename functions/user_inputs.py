@@ -39,11 +39,47 @@ def parse_user_inputs(user_inputs):
         warnings.warn('Two durations not given via the command line,'
                       ' using the given duration from the start of the ECG')
 
-        duration[1] = float(user_inputs[2])
+        # Verify that a number was entered
+        if verify_numeric_inputs(user_inputs[2]):
+            duration[1] = float(user_inputs[2])
+
+        else:
+            raise ValueError('Please provide the second commandline argument '
+                             'as an integer or decimal number!')
 
     elif argc == 4:  # If both durations are given
 
-        duration[0] = float(user_inputs[2])
-        duration[1] = float(user_inputs[3])
+        if verify_numeric_inputs(user_inputs[2]):
+            duration[0] = float(user_inputs[2])
+
+        else:
+            raise ValueError('Please provide the second commandline argument '
+                             'as an integer or decimal number!')
+
+        if verify_numeric_inputs(user_inputs[3]):
+            duration[1] = float(user_inputs[3])
+
+        else:
+            raise ValueError('Please provide the third commandline argument '
+                             'as an integer or decimal number!')
 
     return filename, duration
+
+
+def verify_numeric_inputs(input_num):
+    """Verifies that the user input can be converted to a float.
+
+    Args:
+        input_num (str): string which may contain a float
+
+    Returns:
+        bool: boolean value indicating if input_num can be converted to float
+    """
+
+    try:
+        float(input_num)
+        return True
+
+    except ValueError:
+        return False
+
