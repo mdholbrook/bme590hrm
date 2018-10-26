@@ -26,9 +26,10 @@ def filter_ecg(data):
     volt_filt = low_pass_filter(volt_filt)
 
     # Replace the old voltage information in the numpy array
-    data[:, 1] = volt_filt
+    data_filt = data.copy()
+    data_filt[:, 1] = volt_filt
 
-    return data
+    return data_filt
 
 
 def low_pass_filter(volts, sigma=2, kernel_size=7):
