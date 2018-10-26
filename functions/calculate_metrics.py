@@ -10,7 +10,7 @@ def calculate_metrics(data, data_filt, rpeak_locs):
     # metrics = calc_mean_hr_bpm(df, metrics)
 
     # Calculate voltage extremes
-    # metrics = calc_voltage_extremes(df, metrics)
+    metrics = calc_voltage_extremes(data, metrics)
 
     # Calculate duration
     metrics = calc_duration(data, metrics)
@@ -31,9 +31,28 @@ def calc_mean_hr_bpm(df, metrics):
     return metrics
 
 
-def calc_voltage_extremes(df, metrics):
+def calc_voltage_extremes(data, metrics):
+    """Calculates the extremes of the input ECG.
 
-    metrics['voltage_extremes'] = np.zeros(1)
+    Args:
+        data (2D numpy array): contains time and voltage information from the
+            input ECG. This data is input pre-filtering so the input range is
+            not altered.
+        metrics (dictionary): contains calculated ECG metrics
+
+    Returns:
+        tuple, float: the minimum and maximum voltages recorded during
+            the monitoring period under a dictionary label 'voltage_extremes'.
+    """
+
+    # Get ECG voltage
+    volts = data[:, 1]
+
+    # Calculate voltage extremes and place into a list
+    volts_extremes = (volts.min(), volts.max())
+
+    # Update the dictionary
+    metrics['voltage_extremes'] = volts_extremes
 
     return metrics
 
