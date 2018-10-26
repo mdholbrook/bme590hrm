@@ -36,6 +36,6 @@ def main(user_input):
 
 if __name__ == "__main__":
 
-    user_input = sys.argv
+    cmdline_args = sys.argv
 
-    main(user_input)
+    main(cmdline_args)
