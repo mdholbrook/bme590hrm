@@ -3,6 +3,7 @@ import numpy as np
 from functions.calculate_metrics import calc_num_beats, calc_beats
 from functions.calculate_metrics import calc_voltage_extremes
 from functions.calculate_metrics import check_input_duration
+from functions.calculate_metrics import calc_mean_hr_bpm
 
 
 def test_calc_num_beats():
@@ -70,3 +71,18 @@ def test_check_input_duration(duration, expected):
         output = False
 
     assert output == expected
+
+
+def test_calc_mean_hr_bpm():
+
+    # Set up test data
+    duration = (1, 2)  # [min]
+    beats_per_second = 1.2
+    metrics = {}
+    metrics['beats'] = np.arange(0, 180, beats_per_second)  # [sec]
+    bpm = beats_per_second * 60
+
+    # Call the function
+    metrics = calc_mean_hr_bpm(duration, metrics)
+
+    assert metrics['mean_hr_bpm'] == bpm

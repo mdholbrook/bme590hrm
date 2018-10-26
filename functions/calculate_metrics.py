@@ -9,7 +9,7 @@ def calculate_metrics(data, data_filt, rpeak_locs, duration):
     # Calculate duration
     metrics = calc_duration(data, metrics)
 
-    # Check input duration to calculalted duration
+    # Check input duration to calculated duration
     try:
         check_input_duration(duration, metrics)
     except ValueError:
@@ -78,15 +78,15 @@ def calc_mean_hr_bpm(duration, metrics):
     """
 
     # Get duration indices specified by the user
-    start_ind = metrics['beats'] >= duration[0]
-    end_ind = metrics['beats'] >= duration[1]
+    start_ind = metrics['beats'] >= duration[0]*60
+    end_ind = metrics['beats'] <= duration[1]*60
 
     # Get list of times for each beat, in seconds, during the interval
-    beats = metrics['beats'][start_ind:end_ind]
+    beats = metrics['beats'][start_ind*end_ind]
     bpm = np.mean(beats[1:] - beats[:-1]) * 60  # [beats per min]
 
     # Assign bpm to the dictionary
-    metrics['mean_hr_bme'] = bpm
+    metrics['mean_hr_bpm'] = bpm
 
     return metrics
 
