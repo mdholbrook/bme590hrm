@@ -24,10 +24,13 @@ def write_results_to_file(metrics, filename):
     gen_outpath(save_path)
 
     # Generate a save filename based on the csv file
-    filename = gen_save_filename(filename, save_path)
+    filename_json = gen_save_filename(filename, save_path)
+
+    # Print calcuated metrics
+    print_metrics(metrics, filename)
 
     # Write calculated metrics to a JSON file
-    write_json(metrics, filename)
+    write_json(metrics, filename_json)
 
 
 def gen_save_filename(filename, save_path):
@@ -39,6 +42,7 @@ def gen_save_filename(filename, save_path):
 
     Args:
         filename (str): path to the input csv file as given by the user.
+        save_path (str): base path in which to save output files
 
     Returns:
         str: new filename of a JSON file to be used to save the calculated
@@ -110,3 +114,23 @@ def write_json(metrics, filename):
     except FileNotFoundError:
 
         raise FileNotFoundError('Cannot access output JSON file for writing!')
+
+
+def print_metrics(metrics, filename):
+    """This function simply prints the calculated metrics to the terminal.
+
+    Args:
+        metrics (dict): dictionary of calculated ECG metrics.
+
+    Returns:
+
+    """
+
+    print('\nInput file: %s\n' % filename)
+    print('Metrics:')
+    print('\tDuration: ', metrics['duration'])
+    print('\tVoltage extremes: ', metrics['voltage_extremes'])
+    print('\tNumber of beats: ', metrics['num_beats'])
+    print('\tBeat times: ', metrics['beats'])
+    print('\tMean heart rate: ', metrics['mean_hr_bpm'])
+    print('\n')
