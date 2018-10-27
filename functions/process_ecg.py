@@ -25,6 +25,9 @@ def filter_ecg(data):
     # Remove very high frequency information
     volt_filt = low_pass_filter(volt_filt)
 
+    # Flip the filtered ECG if the negative peaks are higher
+    volt_filt = invert_ecg(volt_filt)
+
     # Replace the old voltage information in the numpy array
     data_filt = data.copy()
     data_filt[:, 1] = volt_filt
@@ -113,6 +116,32 @@ def normalize_ecg(data):
     data[:, 1] = volts_norm
 
     return data
+
+
+def invert_ecg(volt):
+    """This function inverts the ECG if the more prominent peaks are negative.
+
+    Args:
+        volt (1D numpy array): an array containing filtered ECG measurements
+
+    Returns:
+        1D numpy array: an array which contains voltages which have been
+            flipped upside down if they have greater negative values.
+    """
+
+    # Find data extremes
+    metrics = {}
+    extremes = [0, 0]
+    extremes[0] = np.min(volt)
+    extremes[1] = np.max(volt)
+
+    # If the magnitude of the negative value is greater than the positive
+    # then flip the signs
+    if np.abs(extremes[0]) > extremes[1]:
+
+        volt = -volt
+
+    return volt
 
 
 def r_peak_detection(data):
