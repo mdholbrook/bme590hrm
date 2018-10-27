@@ -119,6 +119,9 @@ def write_json(metrics, filename):
 def print_metrics(metrics, filename):
     """This function simply prints the calculated metrics to the terminal.
 
+    This function is useful for immediate debugging as it shows the calculated
+    metrics directly in the terminal window.
+
     Args:
         metrics (dict): dictionary of calculated ECG metrics.
 

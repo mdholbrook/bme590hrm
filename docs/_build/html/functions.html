@@ -169,11 +169,11 @@ over those gaps.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>np array</em>) – a numpy array containing time, first col, and
-ECG, second col, signals</td>
+ECG, second col, signals. May contain NaN values.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy array with interpolated NaN values</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">1D numpy array, float</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">1D numpy array</td>
 </tr>
 </tbody>
 </table>
@@ -192,7 +192,7 @@ ECG, second col, signals</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">array where True denotes a NaN value
-func (function): a function which return on all non-zero values, used
+function: a function which return on all non-zero values, used
 to index the interpolation</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">1D numpy array, bool</td>
@@ -213,7 +213,7 @@ to index the interpolation</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">output non-zero indicies</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">inds (1d numpy array)</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">1d numpy array</td>
 </tr>
 </tbody>
 </table>
@@ -222,7 +222,7 @@ to index the interpolation</td>
 <dl class="function">
 <dt id="functions.load_data.read_csv">
 <code class="descclassname">functions.load_data.</code><code class="descname">read_csv</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.load_data.read_csv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Definition of read_csv</p>
+<dd><p>Reads in an input CSV file</p>
 <p>This function takes a filename and reads in a file and outputs its
 contents. The file should be in csv format and have 2 columns representing
 time and voltage measurements.</p>
@@ -306,7 +306,7 @@ resulting signal will be centered on zero (resting potential).</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">modified array with now-filtered ECG data</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">data (2D numpy array)</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">2D numpy array</td>
 </tr>
 </tbody>
 </table>
@@ -330,8 +330,30 @@ resulting signal will be centered on zero (resting potential).</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">low pass filtered ECG signal</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">volt_filt (1D numpy array)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">1D numpy array</p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.process_ecg.invert_ecg">
+<code class="descclassname">functions.process_ecg.</code><code class="descname">invert_ecg</code><span class="sig-paren">(</span><em>volt</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.process_ecg.invert_ecg" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function inverts the ECG if the more prominent peaks are negative.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>volt</strong> (<em>1D numpy array</em>) – an array containing filtered ECG measurements</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>an array which contains voltages which have been</dt>
+<dd>flipped upside down if they have greater negative values.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">1D numpy array</td>
 </tr>
 </tbody>
 </table>
@@ -371,7 +393,7 @@ resulting signal will be centered on zero (resting potential).</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">low pass filtered ECG signal</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">volt_filt (1D numpy array)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">1D numpy array</p>
 </td>
 </tr>
 </tbody>
@@ -387,11 +409,12 @@ All other non-maxima found from thresholding are suppressed.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>1D numpy array</em>) – a thresholded signal</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>1D numpy array</em>) – a signal which has been thresholded to only
+contain maximum peaks.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an array of maxima indexes</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an array indexes for local maxima</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">floats, 1D numpy array</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">1D numpy array</td>
 </tr>
 </tbody>
 </table>
@@ -425,12 +448,15 @@ nonmaximum suppression is used to detect maxima (R-peak locations).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>numpy array</strong> (<em>2D</em>) – array with two columns columns containing time and ECG
-data</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>2D numpy array</em>) – array with two columns columns containing time
+and ECG data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">return the index locations of detected R-peaks.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">1D numpy array</td>
 </tr>
 </tbody>
 </table>
-<p>Returns:</p>
 </dd></dl>
 
 </div>
@@ -465,18 +491,42 @@ saved as a JSON file and placed in a directory within root called
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – path to the input csv file as given by the user.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
-<dt>new filename of a JSON file to be used to save the calculated</dt>
-<dd>metrics.</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) – path to the input csv file as given by the user.</li>
+<li><strong>save_path</strong> (<em>str</em>) – base path in which to save output files</li>
+</ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>new filename of a JSON file to be used to save the calculated</dt>
+<dd><p class="first last">metrics.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="functions.write_results.print_metrics">
+<code class="descclassname">functions.write_results.</code><code class="descname">print_metrics</code><span class="sig-paren">(</span><em>metrics</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#functions.write_results.print_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function simply prints the calculated metrics to the terminal.</p>
+<p>This function is useful for immediate debugging as it shows the calculated
+metrics directly in the terminal window.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>metrics</strong> (<em>dict</em>) – dictionary of calculated ECG metrics.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns:</p>
 </dd></dl>
 
 <dl class="function">
