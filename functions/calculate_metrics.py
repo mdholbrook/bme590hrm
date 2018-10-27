@@ -1,5 +1,6 @@
 import numpy as np
 from functions.process_ecg import calc_duration
+import matplotlib.pyplot as plt
 
 
 def calculate_metrics(data, data_filt, rpeak_locs, duration):
@@ -14,7 +15,7 @@ def calculate_metrics(data, data_filt, rpeak_locs, duration):
         check_input_duration(duration, metrics)
     except ValueError:
         print('Proceeding using the entire ECG range.')
-        duration = (0, metrics['duration'])
+        duration = (0, metrics['duration']/60)
 
     # Calculate voltage extremes
     metrics = calc_voltage_extremes(data, metrics)
@@ -52,9 +53,10 @@ def check_input_duration(duration, metrics):
     within_signal = duration_seconds <= metrics['duration']
 
     if not within_signal:
-        raise ValueError('Invalid input final bound (%0.2f minutes) which is '
-                         'greater than ECG duration (%0.2f minutes)!'
-                         % (duration_seconds/60, (metrics['duration']/60)))
+        print('Invalid input final bound (%0.2f minutes) is '
+              'greater than ECG duration (%0.2f minutes)!'
+              % (duration_seconds/60, (metrics['duration']/60)))
+        raise ValueError
 
     else:
         return True
@@ -78,12 +80,13 @@ def calc_mean_hr_bpm(duration, metrics):
     """
 
     # Get duration indices specified by the user
-    start_ind = metrics['beats'] >= duration[0]*60
-    end_ind = metrics['beats'] <= duration[1]*60
+    beats = np.array(metrics['beats'])
+    start_ind = beats >= duration[0]*60
+    end_ind = beats <= duration[1]*60
 
     # Get list of times for each beat, in seconds, during the interval
-    beats = metrics['beats'][start_ind*end_ind]
-    bpm = np.mean(beats[1:] - beats[:-1]) * 60  # [beats per min]
+    beat_times = beats[start_ind*end_ind]
+    bpm = 60 / np.mean(beat_times[1:] - beat_times[:-1])  # [beats per min]
 
     # Assign bpm to the dictionary
     metrics['mean_hr_bpm'] = bpm
@@ -133,8 +136,8 @@ def calc_num_beats(rpeak_locs, metrics):
     """
 
     # Add the number of beats
-    num_beats = np.sum(rpeak_locs, dtype=int)
-    metrics['num_beats'] = num_beats
+    num_beats = len(rpeak_locs)
+    metrics['num_beats'] = int(num_beats)
 
     return metrics
 
@@ -155,6 +158,6 @@ def calc_beats(data, rpeak_locs, metrics):
     time = data[:, 0]
     beat_time = time[rpeak_locs]
 
-    metrics['beats'] = beat_time
+    metrics['beats'] = list(beat_time)
 
     return metrics
