@@ -1,7 +1,7 @@
 # Heart rate project
 _Heart rate monitor project for BME590 - Medical Software Design_
 
-This purpose of this project is to develop code which can calculate useful statistics from an ECG read from file. A dual part of this project is proper code development methods, involving good Git practices, detailed documentation, and continuous integrated unit testing on Github using Travis.
+This purpose of this project is to develop code which can calculate useful statistics from an ECG read from file. A key part of this project is the use of proper software development methods, including good Git practices, detailed documentation, and integrated unit testing on Github.
 
 #### Travis contiuous integration status
 [![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
