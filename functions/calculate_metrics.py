@@ -4,6 +4,21 @@ import matplotlib.pyplot as plt
 
 
 def calculate_metrics(data, data_filt, rpeak_locs, duration):
+    """The main caller function for calculating ECG metrics.
+
+    Args:
+        data (2D numpy array): an array containing time and voltage
+            measurements
+        data_filt (2D numpy array): same array as data, but the ECG has
+            been filtered.
+        rpeak_locs (1D numpy array): an array containing the index locations
+            of detected R-peaks
+        duration (list): a list of the start and stop times for calculating
+            average heart rate within a specific time span.
+
+    Returns:
+        dict: a dictionary of calculated metrics
+    """
 
     metrics = {}
 
@@ -69,7 +84,7 @@ def calc_mean_hr_bpm(duration, metrics):
     heart rate is calculated within this interval.
 
     Args:
-        duration (tubple): contains the start and stop times that the user
+        duration (tuple): contains the start and stop times that the user
             wants heart rate information for.
         metrics (dictionary): a dictionary of calculated metrics from the
             input ECG.

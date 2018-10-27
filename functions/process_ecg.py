@@ -14,7 +14,7 @@ def filter_ecg(data):
         data (2D numpy array): contains two columns with time and ECG data
 
     Returns:
-        data (2D numpy array): modified array with now-filtered ECG data
+        2D numpy array: modified array with now-filtered ECG data
     """
 
     volts = data[:, 1]
@@ -44,7 +44,7 @@ def low_pass_filter(volts, sigma=2, kernel_size=7):
         kernel_size (int): size of the Gaussian kernel
 
     Returns:
-        volt_filt (1D numpy array): low pass filtered ECG signal
+        1D numpy array: low pass filtered ECG signal
     """
 
     # Create Gaussian LP kernel
@@ -67,7 +67,7 @@ def high_pass_filter(volts, kernel_size=401):
         kernel_size (int): size of the median filter
 
     Returns:
-        volt_filt (1D numpy array): low pass filtered ECG signal
+        1D numpy array: low pass filtered ECG signal
     """
 
     # Get low frequency signal
@@ -152,11 +152,11 @@ def r_peak_detection(data):
     nonmaximum suppression is used to detect maxima (R-peak locations).
 
     Args:
-        2D numpy array: array with two columns columns containing time and ECG
-            data
+        data (2D numpy array): array with two columns columns containing time
+            and ECG data
 
     Returns:
-
+        1D numpy array: return the index locations of detected R-peaks.
     """
 
     # Get ECG signal
@@ -188,10 +188,11 @@ def nonmax_supression(x):
     All other non-maxima found from thresholding are suppressed.
 
     Args:
-        x (1D numpy array): a thresholded signal
+        x (1D numpy array): a signal which has been thresholded to only
+            contain maximum peaks.
 
     Returns:
-        floats, 1D numpy array: an array of maxima indexes
+        1D numpy array: an array indexes for local maxima
     """
 
     # Get a list of indices which can shift the vector

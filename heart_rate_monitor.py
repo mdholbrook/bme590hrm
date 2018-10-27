@@ -8,6 +8,16 @@ from functions.user_inputs import parse_user_inputs
 
 
 def main(user_input):
+    """Main function which calls all helper functions
+    This is the main function for the heart rate monitoring code
+
+    Args:
+        user_input (list): a list of commandline arguments as passed in
+            using sys.argv()
+
+    Returns:
+
+    """
 
     # Parse user inputs
     filename, duration = parse_user_inputs(user_input)

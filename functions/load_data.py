@@ -4,7 +4,7 @@ from numpy import genfromtxt
 
 
 def read_csv(filename):
-    """Definition of read_csv
+    """Reads in an input CSV file
 
     This function takes a filename and reads in a file and outputs its
     contents. The file should be in csv format and have 2 columns representing
@@ -64,10 +64,10 @@ def interpolate_nan(data):
 
     Args:
         data (np array): a numpy array containing time, first col, and
-            ECG, second col, signals
+            ECG, second col, signals. May contain NaN values.
 
     Returns:
-        1D numpy array, float: numpy array with interpolated NaN values
+        1D numpy array: numpy array with interpolated NaN values
     """
 
     # Find and interpolate over NaN values, time then ECG
@@ -92,7 +92,7 @@ def nan_inds(x):
 
     Returns:
         1D numpy array, bool: array where True denotes a NaN value
-        func (function): a function which return on all non-zero values, used
+        function: a function which return on all non-zero values, used
         to index the interpolation
 
     """
@@ -109,7 +109,7 @@ def non_zero_func(x):
         x (1d numpy array): input array
 
     Returns:
-        inds (1d numpy array): output non-zero indicies
+        1d numpy array: output non-zero indicies
     """
 
     inds = x.nonzero()[0]
