@@ -2,6 +2,7 @@ import pytest
 from functions.process_ecg import filter_ecg, high_pass_filter, low_pass_filter
 from functions.process_ecg import normalize_ecg, nonmax_supression, load_rpeak
 from functions.process_ecg import r_peak_detection, calc_duration
+from functions.process_ecg import invert_ecg
 import numpy as np
 
 
@@ -156,3 +157,15 @@ def test_calc_duration():
     metrics = calc_duration(data, metrics)
 
     assert metrics['duration'] == duration
+
+
+@pytest.mark.parametrize("candidate, expected", [
+    (np.array([0, -1, 2, 0]), np.array([0, -1, 2, 0])),
+    (np.array([0, 1, -2, 0]), np.array([0, -1, 2, 0])),
+    ])
+def test_invert_ecg(candidate, expected):
+
+    # Run the test
+    result = invert_ecg(candidate)
+
+    assert (result == expected).all()
